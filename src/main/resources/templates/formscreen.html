@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="http://localhost:8080/hello/form-post-handle2" method="post">
+    <p>
+        <label for="name"> 이름 </label>  <!--label은 텍스트 누르면 input박스로 이동 하게 함-->
+        <!--name이 key값을 의미함 -->
+        <input id="name" name="name" type="text">
+    </p>
+    <p>
+        <label for="email"> 이메일 </label>
+        <input id="email" name="email" type="text">
+    </p>
+    <p>
+        <label for="passWd"> 비밀번호 </label>
+        <input id="passWd" name="passWd" type="password">
+    </p>
+    <button type="submit">제출</button>
+</form>
+</body>
+</html>

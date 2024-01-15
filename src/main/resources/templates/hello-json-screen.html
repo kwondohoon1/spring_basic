@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Hello Json Screen</title>
+
+</head>
+
+<body>
+<form id="myForm">
+    <p>
+        <label for="name"> 이름 </label>  <!--label은 텍스트 누르면 input박스로 이동 하게 함-->
+        <!--name이 key값을 의미함 -->
+        <input id="name" name="name" type="text">
+    </p>
+    <p>
+        <label for="email"> 이메일 </label>
+        <input id="email" name="email" type="text">
+    </p>
+    <p>
+        <label for="password"> 비밀번호 </label>
+        <input id="password" name="passWd" type="password">
+    </p>
+    <button type="button" onclick="sendData()">제출</button>
+</form>
+<script>
+    async function sendData(){
+       const jsonData ={
+           name:document.getElementById("name").value,
+           email:document.getElementById("email").value,
+           passWd:document.getElementById("password").value,
+       }
+       try{
+            const response = await axios({
+               method : 'POST',
+               url : "http://localhost:8080/hello/json-post-handle3",
+               data : JSON.stringify(jsonData),
+               headers : {'Content-Type':'application/json'}
+           });
+           window.location.href = '/hello/screen';
+       }catch(e){
+            console.log(e);
+       }
+
+    }
+</script>
+
+</body>
+</html>.
