@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.NoSuchElementException;
+
 
 /* 1)회원목록조회
 getmapping, 화면
@@ -81,8 +83,13 @@ public class MemberController {
 
     @GetMapping("/member/find")
     public String meberFind(@RequestParam(value = "id") int id, Model model) {
-        Member member = memberService.memberFind(id);
-        model.addAttribute("findData", id);
-        return "member/member-find";
+        try {
+            MemberResponseDto memberResponseDto = memberService.findById(id);
+            model.addAttribute("member", memberResponseDto);
+            return "member/member-detail";
+        }catch (NoSuchElementException e){
+            return "member/404-error-page";
+        }
+
     }
 }

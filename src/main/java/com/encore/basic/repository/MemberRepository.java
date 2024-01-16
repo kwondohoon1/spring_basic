@@ -5,11 +5,12 @@ import com.encore.basic.domain.MemberRequestDto;
 import com.encore.basic.domain.MemberResponseDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepository {
-    public List<Member> members();
+    public List<Member> findAll();
 
-    public void memberCreate(Member Member);
+    public Member save(Member Member);
 
-    public Member memberFind(String id);
+    public Optional<Member> findById(int id);
 }
