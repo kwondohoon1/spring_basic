@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.NoSuchElementException;
 
 
@@ -70,9 +71,18 @@ public class MemberController {
 
     @PostMapping("members/create")
     public String membersCreate(MemberRequestDto MemberRequestDto) {
+//        트랜잭션 및 예외 처리 테스트
+//        try {
+//            memberService.memberCreate(MemberRequestDto);
+//            return "redirect:/members";
+//        }catch (IllegalArgumentException e) {
+//            return "member/404-error-page";
+//        }
         memberService.memberCreate(MemberRequestDto);
-//        url 리다이렉트
         return "redirect:/members";
+
+//        url 리다이렉트
+
     }
 
     @GetMapping("members")
@@ -87,9 +97,20 @@ public class MemberController {
             MemberResponseDto memberResponseDto = memberService.findById(id);
             model.addAttribute("member", memberResponseDto);
             return "member/member-detail";
-        }catch (NoSuchElementException e){
+        } catch (EntityNotFoundException e) {
             return "member/404-error-page";
         }
+    }
 
+    @GetMapping("/member/delete")
+    public String memberDelete(@RequestParam(value = "id") int id) {
+        memberService.delete(id);
+        return "redirect:/members";
+    }
+
+    @PostMapping("/member/update")
+    public String memberUpdate(MemberRequestDto memberRequestDto) {
+        memberService.memberUpdate(memberRequestDto);
+        return "redirect:/member/find?id="+memberRequestDto.getId();
     }
 }

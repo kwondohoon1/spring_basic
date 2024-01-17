@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface MemberRepository {
     public List<Member> findAll();
 
-    public Member save(Member Member);
+    public Member save(Member member);
 
     public Optional<Member> findById(int id);
+
+    public void delete(Member member);
 }

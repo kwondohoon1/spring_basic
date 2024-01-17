@@ -1,6 +1,8 @@
 package com.encore.basic.domain;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,12 +27,13 @@ public class Member {
     private String password;
     @Setter
     @Column(name = "created_time") //name옵션을 통해 DB의 컬럼명 별도 지정가능
+    @CreationTimestamp
     private LocalDateTime create_time;
+    @UpdateTimestamp
+    private LocalDateTime updatedTime;
     public Member(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = password;
-        this.create_time = LocalDateTime.now();
     }
-
 }
