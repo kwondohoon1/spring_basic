@@ -108,7 +108,7 @@ public class MemberController {
         return "redirect:/members";
     }
 
-    @PostMapping("/member/update")
+    @PostMapping("/members/update")
     public String memberUpdate(MemberRequestDto memberRequestDto) {
         memberService.memberUpdate(memberRequestDto);
         return "redirect:/member/find?id="+memberRequestDto.getId();

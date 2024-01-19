@@ -63,7 +63,7 @@ public class MemberService {
     }
 
     public MemberResponseDto findById(int id) throws EntityNotFoundException{
-        Member member = memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Member member = memberRepository.findById(id).orElseThrow(()->new EntityNotFoundException("검색하신 ID의 Member가 없습니다."));
         MemberResponseDto memberResponseDto = new MemberResponseDto();
         memberResponseDto.setId(member.getId());
         memberResponseDto.setName(member.getName());
@@ -78,6 +78,7 @@ public class MemberService {
     }
     public void memberUpdate(MemberRequestDto memberRequestDto){
         Member member = memberRepository.findById(memberRequestDto.getId()).orElseThrow(EntityNotFoundException::new);
+        System.out.println(memberRequestDto.getId());
         member.updateMember(memberRequestDto.getName(), memberRequestDto.getPassword());
         memberRepository.save(member);
     }
